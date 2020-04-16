@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html {{ HTML_ATTRS }}>
+  <head>
+    {{ HEAD }}
+
+    <script>
+      var version = window.navigator.appVersion.split(";");
+      if (version.length > 1) {
+        var trimVersion = parseInt(
+          version[1].replace(/[ ]/g, "").replace(/MSIE/g, "")
+        );
+        if (trimVersion < 10 && window.location.href.indexOf("ie10-") === -1) {
+          window.location.href = "/ie10-";
+        }
+      }
+
+      var domain = location.hostname.substring(
+        0,
+        location.hostname.indexOf(".")
+      );
+      if (!sessionStorage.getItem("domain")) {
+        sessionStorage.setItem("domain", domain === "dev" ? "webtest" : domain);
+      }
+      if (sessionStorage.getItem("domain") === "nina") {
+        if (location.pathname === "/") {
+          location.href = "/dam/640";
+        }
+        if (location.pathname === "/login") {
+          location.href = "/dam/login";
+        }
+      }
+    </script>
+  </head>
+  <body {{ BODY_ATTRS }}>{{ APP }}
+  </body>
+</html>

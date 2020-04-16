@@ -1,0 +1,7 @@
+$size: 100;
+@while $size >= 0 {
+  .opacity-#{$size} {
+    opacity: $size / 100 !important;
+    $size: $size - 5;
+  }
+}

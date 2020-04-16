@@ -1,0 +1,31 @@
+// Background color
+@include bg-variant('.bg-primary', $brand-primary);
+@include bg-variant('.bg-primary-light', $brand-primary-light);
+@include bg-variant('.bg-primary-light1', $brand-primary-light1);
+@include bg-variant('.bg-secondary', $brand-secondary);
+@include bg-variant('.bg-secondary-alt', $brand-secondary-alt);
+@include bg-variant('.bg-secondary-light', $brand-secondary-light);
+@include bg-variant('.bg-info', $brand-info);
+@include bg-variant('.bg-success', $brand-success);
+@include bg-variant('.bg-success-alt', $brand-success-alt);
+@include bg-variant('.bg-warning', $brand-warning);
+@include bg-variant('.bg-warning-alt', $brand-warning-alt);
+@include bg-variant('.bg-danger', $brand-danger);
+@include bg-variant('.bg-black', $black);
+@include bg-variant('.bg-gray-light', $gray-light);
+@include bg-variant('.bg-gray-light2', $gray-light2);
+@include bg-variant('.bg-gray-light3', $gray-light3);
+@include bg-variant('.bg-white', $white);
+@include bg-variant('.bg-info-light', $brand-info-light);
+@include bg-variant('.bg-blue-light', $brand-blue-light);
+@include bg-variant('.bg-indigo', $brand-indigo);
+@include bg-linear('.bg-linear-primary', #32A4FA, #59B8FF);
+@include bg-linear('.bg-linear-success', #55B923, #76D646);
+@include bg-linear('.bg-linear-indigo', #26C2C2, #3CDEDE);
+@include bg-linear('.bg-linear-warning', #E6AB20, #F5C62B);
+@include bg-linear('.bg-linear-danger', #F6663E, #FF9F70);
+
+.bg-linear {
+  background-image: linear-gradient(to right, #2E9BFF, #1ECFF7);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.2), inset 0 -3px 0 0 rgba(0, 0, 0, 0.2);
+}

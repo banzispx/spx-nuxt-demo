@@ -1,0 +1,15 @@
+@mixin bg-variant($parent, $color) {
+  #{$parent} {
+    background-color: $color !important;
+  }
+  a#{$parent}:hover,
+  a#{$parent}:focus {
+    background-color: darken($color, 10%) !important;
+  }
+}
+// 设置背景的 如果是a标签设置背景，给其加上颜色
+@mixin bg-linear($parent, $color1, $color2) {
+  #{$parent} {
+    background-image: linear-gradient(to right, $color1, $color2);
+  }
+}

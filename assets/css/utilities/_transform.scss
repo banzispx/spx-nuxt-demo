@@ -1,0 +1,19 @@
+@for $index from 0 through 20 {
+  .scale-#{$index} {
+    transform:          scale($index / 10);
+    -ms-transform:      scale($index / 10);
+    -moz-transform:     scale($index / 10);
+    -webkit-transform:  scale($index / 10);
+    -o-transform:       scale($index / 10);
+  }
+}
+
+@for $index from -6 through 6 {
+  .rotate-#{$index * 30} {
+    transform:          rotate($index * 30deg);
+    -ms-transform:      rotate($index * 30deg);
+    -moz-transform:     rotate($index * 30deg);
+    -webkit-transform:  rotate($index * 30deg);
+    -o-transform:       rotate($index * 30deg);
+  }
+}

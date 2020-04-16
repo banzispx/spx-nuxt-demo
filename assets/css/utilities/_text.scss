@@ -1,0 +1,106 @@
+// Text color
+@include text-emphasis-variant('.text-primary', $brand-primary);
+@include text-emphasis-variant('.text-primary-alt', $brand-primary-alt);
+@include text-emphasis-variant('.text-primary-lighter', $brand-primary-lighter);
+@include text-emphasis-variant('.text-secondary', $brand-secondary);
+@include text-emphasis-variant('.text-info', $brand-info);
+@include text-emphasis-variant('.text-info-alt', $brand-info-alt);
+@include text-emphasis-variant('.text-success', $brand-success);
+@include text-emphasis-variant('.text-success-alt', $brand-success-alt);
+@include text-emphasis-variant('.text-success-light', $brand-success-light);
+@include text-emphasis-variant('.text-warning', $brand-warning);
+@include text-emphasis-variant('.text-warning-alt', $brand-warning-alt);
+@include text-emphasis-variant('.text-warning-light', $brand-warning-light);
+@include text-emphasis-variant('.text-warning-light1', $brand-warning-light1);
+@include text-emphasis-variant('.text-danger', $brand-danger);
+@include text-emphasis-variant('.text-black', $black);
+@include text-emphasis-variant('.text-black-light', $black-light);
+@include text-emphasis-variant('.text-black-light1', $black-light1);
+@include text-emphasis-variant('.text-gray', $gray);
+@include text-emphasis-variant('.text-gray-dark', $gray-dark);
+@include text-emphasis-variant('.text-gray-light', $gray-light);
+@include text-emphasis-variant('.text-gray-light1', $gray-light1);
+@include text-emphasis-variant('.text-gray-light3', $gray-light3);
+@include text-emphasis-variant('.text-white', $white);
+@include text-emphasis-variant('.text-info-light', $brand-info-light);
+@include text-emphasis-variant('.text-info-light2', $brand-info-light2);
+@include text-emphasis-variant('.text-first', $brand-first);
+@include text-emphasis-variant('.text-second', $brand-second);
+@include text-emphasis-variant('.text-third', $brand-third);
+@include text-emphasis-variant('.text-disease', $brand-disease);
+@include text-emphasis-variant('.text-dangerous', $brand-dangerous);
+@include text-emphasis-variant('.text-indigo', $brand-indigo);
+@include text-emphasis-variant('.text-purple', $brand-purple);
+
+@include text-hover('.text-hover-primary', $brand-primary);
+
+// Text size
+@for $size from 10 through 60 {
+  .text-#{$size} {
+    font-size: $size * 1px !important;
+  }
+}
+
+// Text overflow
+.text-truncate {
+  @include text-truncate();
+}
+
+@for $line from 1 through 10 {
+  .text-clamp-#{$line} {
+    @include text-truncate-clamp($line);
+  }
+}
+
+// Responsive alignment
+.text-left   { text-align: left !important; }
+.text-right  { text-align: right !important; }
+.text-center { text-align: center !important; }
+
+// Transformation
+.text-lowercase  { text-transform: lowercase !important; }
+.text-uppercase  { text-transform: uppercase !important; }
+.text-capitalize { text-transform: capitalize !important; }
+
+// Weight and italics
+.font-weight-normal { font-weight: normal !important; }
+.font-weight-bold   { font-weight: bold !important; }
+.font-italic        { font-style: italic !important; }
+
+// Cursor
+.cursor-pointer { cursor: pointer !important; }
+.cursor-default { cursor: default !important; }
+.cursor-not-allowed { cursor: not-allowed !important; }
+
+// Line height
+.line-height    { line-height: 1 !important; }
+.line-height-20 { line-height: 20px !important; }
+.line-height-25 { line-height: 25px !important; }
+.line-height-30 { line-height: 30px !important; }
+.line-height-35 { line-height: 35px !important; }
+.line-height-40 { line-height: 40px !important; }
+.line-height-45 { line-height: 45px !important; }
+.line-height-50 { line-height: 50px !important; }
+.line-height-60 { line-height: 60px !important; }
+.line-height-70 { line-height: 70px !important; }
+// White space
+.ws-nowrap    { white-space: nowrap; }
+.ws-pre-wrap  { white-space: pre-wrap; }
+
+// Word break
+.wb-break-all { word-break: break-all; }
+.wb-keep-all  { word-break: keep-all; }
+
+// Underline
+.text-decoration-none      {text-decoration: none !important; }
+.text-underline            {text-decoration: underline !important; }
+.text-through              {text-decoration: line-through !important; }
+
+// Indent
+.text-indent,
+.text-indent p {
+  text-indent: 2em;
+}
+.text-indent-initial {
+  text-indent: initial;
+}
