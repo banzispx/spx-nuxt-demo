@@ -1,9 +1,14 @@
 <template>
   <div>
+    <header><h1>这里是默认的全局头</h1></header>
     <nuxt />
   </div>
 </template>
-
+<script>
+export default {
+  middleware: ['auth']
+};
+</script>
 <style>
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',

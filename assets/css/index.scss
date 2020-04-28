@@ -1,19 +1,19 @@
-@import 'variables';
-@import 'mixins';
+@import 'variables'; // 用来定义scss全局变量
+@import 'mixins'; //抽离公用的scss方法
 
-// @import 'base';
+@import 'base'; // 基本的scss
 // @import "grid";
-// @import 'headline';
+@import 'headline'; // 设置常见的headline样式
 // @import 'layouts';
 // @import 'tables';
 // @import 'type';
 // @import "editor";
 
-@import 'utilities';
-// @import './iconfont';
+@import 'utilities'; // 初始化一些常用的css样式 例如 p-5 mt-3等
+@import './iconfont'; // 阿里适量图库，引入步骤https://www.cnblogs.com/xinci/p/10529399.html
 
 // Override The Third-party
-// @import './element-ui';
+@import './element-ui'; // 重写element的默认样式
 // @import './problems';
 // @import './steps';
 

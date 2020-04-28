@@ -1,0 +1,62 @@
+.el-pagination {
+  text-align: right;
+  .active {
+    background:  $brand-primary;
+    color: #fff!important;
+    border-radius: 5px;
+  }
+  &>button,
+  &>ul,
+  .el-input__inner,
+  .el-pagination__jump,
+  .el-pagination__sizes,
+  .number {
+    height: 22px!important;
+    line-height: 22px!important;
+  }
+  &>button {
+    padding: 0!important;
+  }
+  .el-pagination__jump {
+    margin-left: 0;
+  }
+  .el-input__inner {
+    padding: 0!important;
+  }
+  .el-pagination__sizes {
+    margin-left: 5px;
+    .el-input {
+      width: 85px!important;
+      .el-input__inner {
+        text-align: left!important;
+        padding-left: 10px!important;
+        width: 100%!important;
+      }
+    }
+  }
+}
+
+.page--border {
+  .el-pager li,
+  .btn-prev,
+  .btn-next {
+    border-radius: 4px !important;
+    background: $white !important;
+    border: 1px solid $border-color !important;
+  }
+  .el-pager li.active {
+    background: $brand-primary !important;
+    border-color: $brand-primary !important;
+  }
+  &.el-pagination {
+    &>button,
+    &>ul,
+    .el-input__inner,
+    .el-pagination__jump,
+    .el-pagination__sizes,
+    .number {
+      height: 26px!important;
+      line-height: 24px!important;
+    }
+  }
+}

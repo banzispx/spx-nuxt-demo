@@ -1,0 +1,25 @@
+// Message Box
+.dam-message-box--delete {
+  .el-message-box__header {
+    height: 58px;
+    padding: 22px;
+    border-bottom: 1px solid #dfe3ec;
+  }
+  .el-message-box__content {
+    padding: 46px 40px 30px;
+  }
+  .el-message-box__btns button:nth-child(2) {
+    margin-left: 26px;
+  }
+  .el-message-box__status {
+    position: absolute;
+    top: 55%;
+  }
+  .cancel, .confirm {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  .confirm {
+    margin-right:6px;
+  }
+}

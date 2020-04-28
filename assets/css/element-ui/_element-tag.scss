@@ -1,0 +1,37 @@
+.el-tag {
+  &.bg-primary,
+  &.bg-secondary,
+  &.bg-success,
+  &.bg-success-alt,
+  &.bg-warning,
+  &.bg-danger {
+    color: $white !important;
+    .el-tag__close {
+      color: $white !important;
+    }
+  }
+  &.el-tag--small {
+    font-size: 14px !important;
+    .el-icon-close {
+      transform: scale(1);
+      font-weight: inherit;
+    }
+  }
+}
+.el-tag {
+  &.tag-warning {
+    border-color: #f2703e;
+    color: #f2703e;
+    background-color: #ffe3d8;
+  }
+  &.tag-primary {
+    border-color: #02777F;
+    color: #02777F;
+    background-color: #dfedfe;
+  }
+  &.tag-purple {
+    border-color: #4541c7;
+    color: #4541c7;
+    background-color: #e3e3ff;
+  }
+}

@@ -1,0 +1,105 @@
+.el-collapse.collapse-table {
+  border-bottom: none;
+  .el-collapse-item {
+    .el-collapse-item__header {
+      font-size: inherit;
+      padding-left: 15px;
+      .el-collapse-item__arrow {
+        float: left;
+      }
+    }
+    .el-collapse-item__content {
+      font-size: inherit;
+      padding-bottom: 0;
+      // 使用递归更好但less支持sass不支持
+      > .el-collapse {
+        border-bottom: none;
+        > div > .el-collapse-item {
+          .el-collapse-item__header {
+            padding-left: 35px;
+          }
+          .el-collapse-item__content {
+            > .el-collapse {
+              border-bottom: none;
+              > div > .el-collapse-item {
+                .el-collapse-item__header {
+                  padding-left: 55px;
+                }
+                .el-collapse-item__content {
+                  > .el-collapse {
+                    border-bottom: none;
+                    > div > .el-collapse-item {
+                      .el-collapse-item__header {
+                        padding-left: 75px;
+                      }
+                      .el-collapse-item__content {
+                        > .el-collapse {
+                          border-bottom: none;
+                          > div > .el-collapse-item {
+                            .el-collapse-item__header {
+                              padding-left: 95px;
+                            }
+                            .el-collapse-item__content {
+                              > .el-collapse {
+                                border-bottom: none;
+                                > div > .el-collapse-item {
+                                  .el-collapse-item__header {
+                                    padding-left: 115px;
+                                  }
+                                  .el-collapse-item__content {
+                                    > .el-collapse {
+                                      border-bottom: none;
+                                      > div > .el-collapse-item {
+                                        .el-collapse-item__header {
+                                          padding-left: 135px;
+                                        }
+                                        .el-collapse-item__content {
+                                          > .el-collapse {
+                                            border-bottom: none;
+                                            > div > .el-collapse-item {
+                                              .el-collapse-item__header {
+                                                padding-left: 155px;
+                                              }
+                                              .el-collapse-item__content {
+                                                > .el-collapse {
+                                                  border-bottom: none;
+                                                  > div > .el-collapse-item {
+                                                    .el-collapse-item__header {
+                                                      padding-left: 175px;
+                                                    }
+                                                    .el-collapse-item__content {
+                                                      > .el-collapse {
+                                                        border-bottom: none;
+                                                        > div > .el-collapse-item {
+                                                          .el-collapse-item__header {
+                                                            padding-left: 195px;
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

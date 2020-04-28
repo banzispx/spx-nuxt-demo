@@ -25,13 +25,13 @@ export default {
    */
   css: [
     'element-ui/lib/theme-chalk/index.css',
-    'normalize.css/normalize.css',
-    { src: '~assets/css/index.scss', lang: 'scss' }
+    'normalize.css/normalize.css', // css模块化
+    { src: '~assets/css/index.scss', lang: 'scss' } // 引入全局的css
   ],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/element/element-ui'],
+  plugins: ['~/plugins/element/element-ui', '~/plugins/axios'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -41,13 +41,60 @@ export default {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth',
+    '@nuxtjs/proxy'
   ],
   /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  axios: {},
+  ** Axios module configuration
+  ** See https://axios.nuxtjs.org/options
+  */
+  axios: {
+    proxy: true
+  },
+  proxy: {
+    '/api': 'http://localhost:3000',
+    '/laravel': {
+      target: 'https://laravel-auth.nuxtjs.app',
+      pathRewrite: { '^/laravel': '/' }
+    }
+  },
+  auth: {
+    redirect: {
+      callback: '/callback',
+      logout: '/signed-out'
+    },
+    strategies: {
+      local: {
+        token: {
+          property: 'token.accessToken',
+          type: 'Bearer'
+        },
+        endpoints: {
+          login: { propertyName: 'token.accessToken' }
+        }
+      },
+      localRefresh: {
+        _scheme: 'refresh',
+        token: {
+          property: 'token.accessToken',
+          maxAge: 15
+        },
+        refreshToken: {
+          property: 'token.refreshToken',
+          data: 'refreshToken',
+          maxAge: false
+        },
+        clientId: {
+          property: 'token.clientId',
+          data: 'clientId'
+        },
+        grantType: {
+          data: 'grantType'
+        }
+      }
+    }
+  },
   /*
    ** Build configuration
    */

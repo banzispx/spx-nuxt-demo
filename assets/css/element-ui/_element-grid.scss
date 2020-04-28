@@ -1,0 +1,10 @@
+.grid-table > div .el-col {
+  border-right: 1px solid #e4ebf4;
+  &:last-child {
+    border: 0;
+  }
+  &.text-center {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+}

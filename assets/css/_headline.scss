@@ -1,0 +1,21 @@
+.headline,
+.headline-primary,
+.headline-secondary,
+.headline-info,
+.headline-success,
+.headline-success-alt,
+.headline-warning,
+.headline-danger,
+.headline-black {
+  padding-left: 16px;
+  border-left: $border-width-lg solid $gray;
+}
+
+.headline-primary     { border-color: $brand-primary; }
+.headline-secondary   { border-color: $brand-secondary; }
+.headline-info        { border-color: $brand-info; }
+.headline-success     { border-color: $brand-success; }
+.headline-success-alt { border-color: $brand-success-alt; }
+.headline-warning     { border-color: $brand-warning; }
+.headline-danger      { border-color: $brand-danger; }
+.headline-black       { border-color: $black; }

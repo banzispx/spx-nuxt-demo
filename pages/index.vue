@@ -1,49 +1,20 @@
 <template>
   <div class="container">
     <div>
-      <logo />
+      <!-- <logo /> -->
       <h1 class="title">
         spx-nuxt-demo121
       </h1>
       <h2 class="subtitle">
         My tiptop Nuxt.js projec1t1212
       </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          G itHub12212
-        </a>
-      </div>
     </div>
   </div>
 </template>
 <script>
-import Logo from '~/components/Logo.vue';
 
 export default {
-  components: {
-    Logo
-  },
-  methods: {
-    gitname() {
-      let arr = [1, 2];
-      console.log();
-      console.log();
-      console.log(1221);
-      console.log();
-      console.log(12);
-      console.log(2323, arr);
-    },
-    getna() {
-      console.log(1212);
-    }
-  }
+  methods: {}
 };
 </script>
 <style>

@@ -1,0 +1,33 @@
+.el-button {
+  &.el-button--medium.btn-md {
+    padding: 12px 15px !important;
+  }
+  &.is-plain {
+    &.el-button--primary.btn-primary {
+      color: $brand-primary;
+      background: $white;
+      border-color: $brand-primary;
+      &:hover {
+        color: $white;
+        background: $brand-primary;
+      }
+    }
+  }
+  &.el-button--primary {
+    background-image: linear-gradient(to right, #2E9BFF, #1ECFF7);
+    border: 1px solid transparent;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.2), inset 0 -3px 0 0 rgba(0, 0, 0, 0.2);
+  }
+  &.el-button--danger {
+    color: $white;
+    background: $brand-danger-light;
+    border-color: $brand-danger-light;
+    &:hover {
+      color: $white;
+      background: $brand-danger-light;
+    }
+  }
+  &.el-button--text{
+    color: $brand-primary;
+  }
+}

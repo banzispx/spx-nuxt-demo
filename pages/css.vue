@@ -1,6 +1,9 @@
 <template>
   <section class="container px-4">
-    <div v-for="(list, listIndex) in lists" :key="listIndex">
+    <div
+      v-for="(list, listIndex) in lists"
+      :key="listIndex"
+    >
       <h5>{{ list.name }}</h5>
       <el-row :gutter="20">
         <el-col
@@ -39,7 +42,12 @@
     </el-row>
     <h5>width、height(width,height: 0-80, w, h: 0-100)</h5>
     <el-row>
-      <el-col v-for="(item, index) in size" :key="index" :span="5" class="m-2">
+      <el-col
+        v-for="(item, index) in size"
+        :key="index"
+        :span="5"
+        class="m-2"
+      >
         {{ item }}
       </el-col>
     </el-row>

@@ -1,0 +1,93 @@
+// Form
+
+// Input
+.dam-input-group {
+  .el-input > .el-input__inner {
+    border-bottom-right-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+  .el-button {
+    border-bottom-left-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+  }
+}
+
+.el-input.text-center {
+  > input {
+    text-align: center;
+  }
+}
+.el-input.text-primary {
+  > input {
+    color: $brand-primary;
+  }
+}
+
+// Form Item
+.el-form-item.form-label--headline {
+  &.is-required {
+    .el-form-item__label:before {
+      content: '';
+    }
+  }
+  .el-form-item__label {
+    font-size: 16px;
+    color: $body-color;
+    line-height: 1;
+    padding-bottom: 0;
+    margin-bottom: 15px;
+    @extend .headline-primary;
+  }
+  .el-form-item__content {
+    margin: 0 15px;
+  }
+}
+
+.el-form.el-form--label-top {
+  .el-form-item {
+    .el-form-item__label {
+      padding-bottom: 0;
+    }
+  }
+}
+
+// Textarea
+@for $i from 0 through 50 {
+  .el-textarea.height-#{$i} > .el-textarea__inner {
+    height: $per-size * $i !important;
+  }
+}
+
+// File
+.el-upload {
+  width: 100%;
+}
+.el-upload-list__item:first-child {
+  margin-top: 0 !important;
+}
+
+// dropdown
+.el-dropdown-menu__item:not(.is-disabled):hover, .el-dropdown-menu__item:focus{
+  color: $brand-primary!important;
+}
+
+// select
+.el-select-dropdown__item.selected {
+  color: $brand-primary!important;
+}
+.el-select .el-input__inner:focus{
+  border-color: $brand-primary!important;
+}
+// switch
+.el-switch__label.is-active {
+  color: $brand-primary!important;
+}
+
+// tree
+.el-tree__empty-text{
+  font-size: 14px!important;
+}
+
+.el-radio__input.is-checked + .el-radio__label{
+  color: $brand-primary!important;
+}

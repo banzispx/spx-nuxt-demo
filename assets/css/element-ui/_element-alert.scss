@@ -1,0 +1,17 @@
+.el-alert.dam-alert {
+  background-color: $white;
+  color: $body-color;
+  .el-alert__content {
+    padding: 0 4px;
+  }
+}
+
+.el-alert.el-alert--warning.dam-alert {
+  color: $brand-danger;
+  .el-alert__content {
+    padding: 0 8px;
+  }
+  .el-alert__icon.el-icon-warning {
+    margin-right: 15px;
+  }
+}
