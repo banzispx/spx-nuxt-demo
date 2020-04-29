@@ -70,28 +70,52 @@ module.exports = {
   },
   env: {
     browser: true,
-    node: true
+    node: true,
   },
-  extends: ['standard','plugin:vue/recommended'],
+  extends: ["standard", "plugin:vue/recommended"],
   // required to lint *.vue files
-  plugins: [
-    'html'
-  ],
+  plugins: ["html"],
   // add your custom rules here
   rules: {
-    "semi": ["error", "always"],
-    "space-before-function-paren": ["error", {
-      "anonymous": "always",
-      "named": "never",
-      "asyncArrow": "always"
-    }],
+    semi: ["error", "always"],
+    "space-before-function-paren": [
+      "error",
+      {
+        anonymous: "always",
+        named: "never",
+        asyncArrow: "always",
+      },
+    ],
+    // 下面是规定vue组件代码的顺序的https://eslint.vuejs.org/rules/order-in-components.html
+    "vue/order-in-components": ["error", {
+      "order": [
+        "el",
+        "name",
+        "parent",
+        "functional",
+        ["delimiters", "comments"],
+        ["components", "directives", "filters"],
+        "extends",
+        "mixins",
+        "inheritAttrs",
+        "model",
+        ["props", "propsData"],
+        "data",
+        "computed",
+        "watch",
+        "LIFECYCLE_HOOKS",
+        "methods",
+        ["template", "render"],
+        "renderError"
+      ]
+    }]
   },
   globals: {
-    'Cesium': true,
-    'SuperMap':true,
-    'ol':true,
-    'L': true,
-    'proj4':true,
-    'AMapUI': true
-  }
-}
+    Cesium: true,
+    SuperMap: true,
+    ol: true,
+    L: true,
+    proj4: true,
+    AMapUI: true,
+  },
+};

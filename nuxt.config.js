@@ -62,7 +62,7 @@ export default {
   auth: {
     redirect: {
       callback: '/callback',
-      logout: '/signed-out'
+      logout: '/login'
     },
     strategies: {
       local: {

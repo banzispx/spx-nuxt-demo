@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import * as _ from 'lodash';
-
+import shared from './shared';
 Vue.use(Vuex);
 
 const dam = () => {
@@ -17,12 +17,8 @@ const dam = () => {
         }
       }
     },
-    modules: {},
-    actions: {
-      // 查询单个测点水质数据
-      async selectSingleData() {
-        return this.$axios.get('/xiliquality/api/codeInfo/313600090');
-      }
+    modules: {
+      shared
     }
   });
 };

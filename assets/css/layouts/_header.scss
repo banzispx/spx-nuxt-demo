@@ -1,0 +1,20 @@
+.header {
+  .header-btn {
+    background-color: transparent;
+    min-width: 56px;
+    height: 66px;
+    transition: all 0.4s ease;
+    &:hover,
+    &.active {
+      background-color: rgba(255,255,255,0.15);
+    }
+  }
+  button{
+    border:none
+  }
+  .el-badge > .el-badge__content {
+    top: 19px;
+    right: 35px;
+    border: 0;
+  }
+}
