@@ -55,7 +55,7 @@
           </div>
           <div class="form-group--login mt-3 fl">
             <el-checkbox v-model="formLogin.rememberMe">
-              <!-- <span class="text-black-light">{{ $t('login.remember') }}</span> -->
+              <span class="text-black-light">{{ $t('login.remember') }}</span>
             </el-checkbox>
           </div>
           <el-button

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import * as _ from 'lodash';
 import shared from './shared';
+import i18n from './i18n';
 Vue.use(Vuex);
 
 const dam = () => {
@@ -18,7 +19,8 @@ const dam = () => {
       }
     },
     modules: {
-      shared
+      shared,
+      i18n
     }
   });
 };
