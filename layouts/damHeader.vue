@@ -10,7 +10,7 @@
         width="36px"
         class="mr-2"
         style="margin-top: -4px"
-      ><span class="text-17">水库管理系统</span>
+      ><span class="text-17">Nuxt 项目demo</span>
     </div>
     <div class="fr opacity-85">
       <el-badge
@@ -101,7 +101,7 @@ export default {
       unreadMessages: {},
       showMessagePop: false,
       user: {
-        name: '刘先生',
+        name: '小板子',
         profile: '/images/profile.png'
       },
       isShowProblemDialog: false

@@ -94,23 +94,39 @@ export default {
         {
           path: '/',
           key: '0',
-          title: '水库运行全景',
+          title: '首页',
           icon: 'icon-jiance',
           hasAuth: true,
           hidden: false
         },
         {
-          path: '/workbench',
+          path: '',
           key: '1',
-          title: '工作台',
+          title: 'SVG',
           icon: 'icon-dabaxinxi',
           hasAuth: true,
-          hidden: false
+          hidden: false,
+          children: [
+            {
+              path: '/svg/tree',
+              key: '1-0',
+              title: '树形',
+              hasAuth: true,
+              hidden: false
+            },
+            {
+              path: '/svg/rectangle',
+              key: '1-1',
+              title: '矩形',
+              hasAuth: true,
+              hidden: false
+            }
+          ]
         },
         {
           path: '',
           key: '2',
-          title: '安全管理',
+          title: '地图',
           icon: 'icon-wenjianjiance',
           hasAuth: true,
           hidden: false,

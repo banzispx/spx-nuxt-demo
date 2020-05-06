@@ -26,6 +26,9 @@ const mutations = {
   },
   SET_CONTAINER_WIDTH(state, containerWidth) {
     state.containerWidth = containerWidth;
+  },
+  SET_SHOW_NAV(state, showNav) {
+    state.showNav = showNav;
   }
 };
 

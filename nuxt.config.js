@@ -30,6 +30,7 @@ export default {
   ],
   /*
    ** Plugins to load before mounting the App
+   *https://www.cnblogs.com/weiqinl/p/10581867.html 关于国际化的参考
    */
   plugins: ['~/plugins/element/element-ui', '~/plugins/axios', '~/plugins/i18n.js'],
   router: {

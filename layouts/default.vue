@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState, mapMutations, mapActions } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 // import * as SockJS from 'sockjs-client';
 // import * as Stomp from 'webstomp-client';
 import damHeader from '~/layouts/damHeader';
@@ -49,8 +49,7 @@ export default {
     ...mapState({
       containerHeight: state => state.shared.containerHeight,
       showNav: state => state.shared.showNav
-    }),
-    ...mapGetters(['getTaskTypeLabel', 'getTaskLink'])
+    })
   },
   created() {
     if (process.browser) {
@@ -59,43 +58,6 @@ export default {
     }
   },
   mounted() {
-    // this.$nextTick(() => {
-    //   this.loadUnreadMessages();
-    //   this.socket = new SockJS(URL + '/api-messages');
-    //   this.stompClient = Stomp.over(this.socket);
-    //   this.stompClient.connect({}, () => {
-    //     this.stompClient.subscribe(
-    //       `/user/${this.auth.user.id}/messages`,
-    //       data => {
-    //         const message = JSON.parse(data.body);
-    //         this.SET_CURRENT_MESSAGE(message);
-    //         const h = this.$createElement;
-    //         this.loadUnreadMessages();
-    //         this.$notify({
-    //           title: '消息提示',
-    //           message: h('p', { class: 'text-gray' }, [
-    //             '您有一个新的',
-    //             h('strong', {}, this.getTaskTypeLabel(message.userTask.type)),
-    //             '任务 ',
-    //             h(
-    //               'a',
-    //               {
-    //                 class: 'text-primary',
-    //                 attrs: {
-    //                   href: this.getTaskLink(message.userTask),
-    //                   target: '_blank'
-    //                 }
-    //               },
-    //               message.content
-    //             )
-    //           ]),
-    //           position: 'bottom-right',
-    //           customClass: 'text-gray right-0'
-    //         });
-    //       }
-    //     );
-    //   });
-    // });
   },
   destroyed() {
     if (process.browser) {
@@ -106,29 +68,14 @@ export default {
     ...mapMutations([
       'SET_CONTAINER_HEIGHT',
       'SET_CONTAINER_WIDTH',
-      'SET_SHOW_NAV',
-      'SET_UNREAD_MESSAGES',
-      'SET_CURRENT_FAVORITE',
-      'SET_CURRENT_MESSAGE'
+      'SET_SHOW_NAV'
     ]),
-    ...mapActions(['setMessageRead']),
     getSize() {
       this.SET_CONTAINER_WIDTH(window.innerWidth);
       this.SET_CONTAINER_HEIGHT(window.innerHeight - 64);
     },
-    loadUnreadMessages() {
-      // this.getMessages({ size: 5, status: 0 }).then(res => {
-      //   this.SET_UNREAD_MESSAGES(res.data);
-      // });
-    },
-    readMessage(id) {
-      this.setMessageRead(id).then(() => {
-        this.loadUnreadMessages();
-      });
-    },
     collapseNav() {
       this.SET_SHOW_NAV(!this.showNav);
-      // this.bus.$emit('nav-resize');
     }
   }
 };
