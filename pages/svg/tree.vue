@@ -4,9 +4,11 @@
   </section>
 </template>
 <script>
+import { mapActions } from 'vuex';
 export default {
   data() {
     return {
+      maxInt: 10000,
       dx: 300, // 水平方向上节点的位移
       dy: 50, // 垂直方向上节点的位移
       x0: 50, // 根节点x轴上的初始位置
@@ -18,262 +20,48 @@ export default {
       originRoot: {},
       riskSources: [
         {
-          riskId: 1,
-          damId: 371,
-          damName: '新丰江',
-          operator: '运行单位',
-          supervisor: '主管单位',
-          riskTypeId: 1,
+          riskId: 0,
           riskType: '风险类型1',
           name: '风险源名称',
-          riskStatement: '',
-          volumnOfEarch: 0,
-          riverDistance: 0,
-          latitude: 36.11944466068729,
-          longitude: 100.91757774353027,
-          riskLevelValue: 8,
-          riskLevel: '一般风险',
-          complexRiskLevel: 0,
-          dailyResponse: '',
-          danger: '',
-          img: '/resources/1577427487133-龙羊峡.jpg',
-          evaluationReports: [
-
-          ],
-          emergencyPlans: [
-
-          ]
+          riskStatement: ''
         }
       ],
       riskSourceMap: {
-        1: [
+        0: [
           {
             id: 1,
-            damId: 371,
-            riskId: 1,
+
             parentId: 0,
-            endPoint: 0,
-            name: '可能后果1',
-            eventTypeId: 6,
-            eventType: '风险事件,泥石流',
-            probability: 5,
-            consequence: 3,
-            riskLevelValue: 15,
-            complexRiskLevel: 0,
-            riskLevel: '较大风险',
-            resultStatement: '',
-            parameter1: '自选参数一',
-            parameter2: '自选参数二',
-            parameter3: '自选参数三',
-            parameter4: '自选参数四',
-            changeConditions: [
-              {
-                id: 1,
-                possibleResultId: 1,
-                damId: 371,
-                name: '变化条件1.1',
-                conditionTypeId: 1,
-                conditionType: '地震',
-                centerDistance: 150,
-                levelMin: 5,
-                levelMax: 7,
-                monitoringTypeId: 0,
-                monitoringPoint: '',
-                possibilityChange: 1.5,
-                independent: 0,
-                lat: null,
-                lng: null
-              },
-              {
-                id: 2,
-                possibleResultId: 1,
-                damId: 371,
-                name: '变化条件1.2',
-                conditionTypeId: 3,
-                conditionType: '降雨',
-                centerDistance: 0,
-                levelMin: 5,
-                levelMax: 7,
-                monitoringTypeId: 2,
-                monitoringPoint: 'xx监测点',
-                possibilityChange: 1.5,
-                independent: 0,
-                lat: null,
-                lng: null
-              }
-            ],
-            mark: 0
+            riskSources: 0,
+            name: '可能后果1'
           },
           {
             id: 2,
-            damId: 371,
-            riskId: 0,
+
             parentId: 1,
-            endPoint: 1,
-            name: '可能后果2',
-            eventTypeId: 6,
-            eventType: '风险事件,泥石流',
-            probability: 4,
-            consequence: 2,
-            riskLevelValue: 8,
-            complexRiskLevel: 0,
-            riskLevel: '一般风险',
-            resultStatement: '',
-            parameter1: '自选参数一',
-            parameter2: '自选参数二',
-            parameter3: '自选参数三',
-            parameter4: '自选参数四',
-            changeConditions: [
-              {
-                id: 3,
-                possibleResultId: 2,
-                damId: 371,
-                name: '变化条件1-1 end.1',
-                conditionTypeId: 1,
-                conditionType: '地震',
-                centerDistance: 150,
-                levelMin: 5,
-                levelMax: 7,
-                monitoringTypeId: 0,
-                monitoringPoint: '',
-                possibilityChange: 1.5,
-                independent: 0,
-                lat: null,
-                lng: null
-              },
-              {
-                id: 4,
-                possibleResultId: 2,
-                damId: 371,
-                name: '变化条件1-1 end.2',
-                conditionTypeId: 3,
-                conditionType: '降雨',
-                centerDistance: 0,
-                levelMin: 5,
-                levelMax: 7,
-                monitoringTypeId: 2,
-                monitoringPoint: 'xx监测点',
-                possibilityChange: 1.5,
-                independent: 0,
-                lat: null,
-                lng: null
-              }
-            ],
-            mark: 0
+            riskSources: 0,
+            name: '可能后果2'
+          },
+          {
+            id: 5,
+
+            parentId: 1,
+            riskSources: 0,
+            name: '可能后果'
           },
           {
             id: 3,
-            damId: 371,
-            riskId: 0,
+
             parentId: 1,
-            endPoint: 0,
-            name: '可能后果3',
-            eventTypeId: 6,
-            eventType: '风险事件,泥石流',
-            probability: 1,
-            consequence: 5,
-            riskLevelValue: 5,
-            complexRiskLevel: 0,
-            riskLevel: '一般风险',
-            resultStatement: '',
-            parameter1: '自选参数一',
-            parameter2: '自选参数二',
-            parameter3: '自选参数三',
-            parameter4: '自选参数四',
-            changeConditions: [
-              {
-                id: 5,
-                possibleResultId: 3,
-                damId: 371,
-                name: '变化条件1-2.1',
-                conditionTypeId: 1,
-                conditionType: '地震',
-                centerDistance: 150,
-                levelMin: 5,
-                levelMax: 7,
-                monitoringTypeId: 0,
-                monitoringPoint: '',
-                possibilityChange: 1.5,
-                independent: 0,
-                lat: null,
-                lng: null
-              },
-              {
-                id: 6,
-                possibleResultId: 3,
-                damId: 371,
-                name: '变化条件1-2.2',
-                conditionTypeId: 3,
-                conditionType: '降雨',
-                centerDistance: 0,
-                levelMin: 5,
-                levelMax: 7,
-                monitoringTypeId: 2,
-                monitoringPoint: 'xx监测点',
-                possibilityChange: 1.5,
-                independent: 0,
-                lat: null,
-                lng: null
-              }
-            ],
-            mark: 0
+            riskSources: 0,
+            name: '可能后果3'
           },
           {
             id: 4,
-            damId: 371,
-            riskId: 0,
+
             parentId: 3,
-            endPoint: 1,
-            name: '可能后果4',
-            eventTypeId: 6,
-            eventType: '风险事件,泥石流',
-            probability: 4,
-            consequence: 3,
-            riskLevelValue: 12,
-            complexRiskLevel: 0,
-            riskLevel: '较大风险',
-            resultStatement: '',
-            parameter1: '自选参数一',
-            parameter2: '自选参数二',
-            parameter3: '自选参数三',
-            parameter4: '自选参数四',
-            changeConditions: [
-              {
-                id: 7,
-                possibleResultId: 4,
-                damId: 371,
-                name: '变化条件1-2.1',
-                conditionTypeId: 1,
-                conditionType: '地震',
-                centerDistance: 150,
-                levelMin: 5,
-                levelMax: 7,
-                monitoringTypeId: 0,
-                monitoringPoint: '',
-                possibilityChange: 1.5,
-                independent: 0,
-                lat: null,
-                lng: null
-              },
-              {
-                id: 8,
-                possibleResultId: 4,
-                damId: 371,
-                name: '变化条件1-2.2',
-                conditionTypeId: 3,
-                conditionType: '降雨',
-                centerDistance: 0,
-                levelMin: 5,
-                levelMax: 7,
-                monitoringTypeId: 2,
-                monitoringPoint: 'xx监测点',
-                possibilityChange: 1.5,
-                independent: 0,
-                lat: null,
-                lng: null
-              }
-            ],
-            mark: 0
+            riskSources: 0,
+            name: '可能后果4'
           }
         ]
       },
@@ -292,8 +80,8 @@ export default {
   mounted() {
     const that = this;
     // 注册全局的方法，然后再调用本地的方法
-    window.delNode = function (nodeId, nodeRiskId) {
-      that.delNodeConf(nodeId, nodeRiskId);
+    window.delNode = function (nodeId, nodeRiskId, nodeRiskSourcesId) {
+      that.delNodeConf(nodeId, nodeRiskId, nodeRiskSourcesId);
     };
     window.addNode = function (nodeId, nodeRiskId) {
       that.addNode(nodeId, nodeRiskId);
@@ -305,8 +93,38 @@ export default {
     // 处理接受过来的risksources参数
     this.riskTreeList = this.dealRiskSources(this.riskSources, this.riskSourceMap, this.riskSourceDetailMap);
     this.initSvg(this.riskTreeList);
+    // 下面是测试
+    // this.getText();
   },
   methods: {
+    ...mapActions('svg', [
+      'getToken', 'getData'
+    ]),
+    async getText() {
+      const params = {
+        client_secret: '8b5032524c3d6a649cacf04781628396450bce0f6e07280a',
+        client_id: '9f70d0b207d2419eb927ba939847d1a3',
+        grant_type: 'client_credentials'
+      };
+      const res = await this.getToken(params);
+      console.log(res.data.access_token, 'res22354');
+      this.getData(res.data).then(res => {
+        if (res.status === 200) {
+          console.log(res.data, 'data');
+        }
+      });
+      // this.$axios({
+      //   method: 'get',
+      //   url: '/huawei/service/GRKJ__Rain/0.1.0/queryNewRainMonitor?addvcd&bsnm&stcds',
+      //   headers: {
+      //     'access-token': res.data.access_token
+      //   }
+      // }).then(res => {
+      //   if (res.status === 200) {
+      //     console.log(res.data, 'data');
+      //   }
+      // });
+    },
     // 处理传入数据的父子关系，组装成树形结构
     dealRiskSources(riskSources, riskSourceMap, riskSourceDetailMap) {
       const riskTreeList = [];
@@ -414,23 +232,6 @@ export default {
     },
     // 画节点，第一个参数为要画的节点 第二个为根节点
     drawNode(node, rootnode) {
-      // 根据nodeId是否存在判断是否是风险源 如果不存在 说明是 请求节点信息
-      // if (!node.id) {
-      //   // console.log(node);
-      //   let riskDetail = await this.findRiskSourceDetail(node.riskId, this.damId);
-      //   // riskDetail.then(res => {
-      //   //   node.level = res.level;
-      //   //   node.riverDistance = res.riverDistance;
-      //   //   node.volumnOfEarch = res.volumnOfEarch;
-      //   //   node.possibleResultName = res.possibleResultName;
-      //   //   // console.log(res, 'res');
-      //   // });
-      //   // console.log(riskDetail, 54545);
-      // }
-      // <div class="prompt-box"><p class="prompt-box-title">${node.name}</p>
-      // <p class="prompt-box-content"><span>可能后果:${node.possibleResultName}</span> <span>风险等级:${node.level}</span></p>
-      // <p class="prompt-box-content"><span>方量:${node.riverDistance}</span><span>距大坝距离:${node.volumnOfEarch}</span></p>
-      // </div>
       this.riskTreeInnerHtml[rootnode.riskId] += `<rect x="${node.x}" y="${node.y}" rx="2" ry="2" width="150" height="40" 
       style="fill:rgb(255,255,255);stroke-width:2;stroke:rgba(255,208,165,0.5);
       fill-opacity:0.1;stroke-opacity:0.9;opacity:0.9;"></rect>
@@ -439,9 +240,9 @@ export default {
         <div class="nodeObj">
           <span class="tip-img">
             ${node.name.length > 6 ? `${node.name.slice(0, 5)}...` : `${node.name}`}
-            ${node.id ? '' : `<div class="prompt-box"><p class="prompt-box-title">${node.name}</p>
-                              <p class="prompt-box-content"><span>可能后果:${node.possibleResultName}</span> <span>风险等级:${node.level}</span></p>
-                              <p class="prompt-box-content"><span>方量:${node.riverDistance}</span><span>距大坝距离:${node.volumnOfEarch}</span></p>
+            ${node.name121 ? '' : `<div class="prompt-box"><p class="prompt-box-title">${node.name}</p>
+                              <p class="prompt-box-content"><span>节点ID:${node.id || node.riskId}</span> </p>
+                              <p class="prompt-box-content"></p>
                               </div>
             `}
           </span>
@@ -456,7 +257,7 @@ export default {
                 新增
               </div>
             </span>
-            <span class="del" onclick="delNode(${node.id}, ${node.riskId})"> <span style="font-size:25px"> × </span>
+            <span class="del" onclick="delNode(${node.id}, ${node.riskId},${node.riskSources})"> <span style="font-size:25px"> × </span>
               <div class="item" >
                 删除
               </div>
@@ -511,7 +312,7 @@ export default {
       this.riskTreeInnerHtml[rootnode.riskId] += `<path d="M ${leftx} ${lefty} C ${btmx} ${btmy} ${topx} ${topy} ${rightx} ${righty}" stroke="#B8B8B8" stroke-dasharray="10,10" stroke-width="2" fill="none" />`;
     },
     // 删除节点确认
-    delNodeConf(nodeId, nodeRiskId) {
+    delNodeConf(nodeId, nodeRiskId, nodeRiskSourcesId) {
       // let that = this;
       this.$confirm(
         '该项的所有分支都会被删除，您确定要删除吗?',
@@ -528,42 +329,52 @@ export default {
             type: 'success',
             message: '删除成功!'
           });
-          this.delNode(nodeId, nodeRiskId);
+          this.delNode(nodeId, nodeRiskId, nodeRiskSourcesId);
         });
     },
     // 删除节点的操作 添加节点 编辑节点
-    delNode(nodeId, nodeRiskId) {
-      console.log(nodeId, 'ndoeId', this.$parent);
-      // let svgJson = _.cloneDeep(this.originRoot);
-      // this.calcLayerAndHeight(svgJson, null);
-      // // svgJson.children[0].children = [];
-      // // 拿到处理后的Json数据
-      // this.findJson(svgJson, nodeId);
-      // // 找到到父节点的路径数组
-      // this.findnodeArr = [];
-      // this.findParentArr(this.findnode);
-      // let rootToNodeArr = this.findnodeArr.reverse();
-      // let drawJson;
-      // if (rootToNodeArr.length === 0) {
-      //   svgJson = {};
-      // } else if (rootToNodeArr.length === 1) {
-      //   svgJson.children.splice(rootToNodeArr[0], 1);
-      // } else {
-      //   for (let index = 0; index < rootToNodeArr.length; index++) {
-      //     if (index === 0) {
-      //       drawJson = svgJson.children[rootToNodeArr[index]];
-      //     } else if (index === rootToNodeArr.length - 1) {
-      //       drawJson.children.splice(rootToNodeArr[index], 1);
-      //     } else {
-      //       drawJson = drawJson.children[rootToNodeArr[index]];
-      //     }
-      //   }
-      // }
-      // this.initSvg(svgJson);
+    delNode(nodeId, nodeRiskId, nodeRiskSourcesId) {
+      if (nodeId) {
+        // 说明是不是根节点
+        const findindex = this.riskSourceMap[nodeRiskSourcesId].findIndex(item => item.id * 1 === nodeId * 1);
+        this.riskSourceMap[nodeRiskSourcesId].splice(findindex, 1);
+        this.riskTreeList = this.dealRiskSources(this.riskSources, this.riskSourceMap, this.riskSourceDetailMap);
+        this.initSvg(this.riskTreeList);
+      } else {
+        // 说明是根节点
+        const findindex = this.riskSources.findIndex(item => item.riskId * 1 === nodeRiskId * 1);
+        this.riskSources.splice(findindex, 1);
+        this.riskTreeList = this.dealRiskSources(this.riskSources, this.riskSourceMap, this.riskSourceDetailMap);
+        this.initSvg(this.riskTreeList);
+      }
     },
     addNode(nodeId, nodeRiskId) {
-      // this.$emit('addSvgNode', nodeId, nodeRiskId);
       console.log(nodeId, nodeRiskId);
+      if (nodeId) {
+        // 说明是不是根节点
+        this.riskSourceMap[0].push(
+          {
+            id: ++this.maxInt,
+            parentId: nodeId,
+            riskSources: 0,
+            name: `可能后果${++this.maxInt}`
+          }
+        );
+        this.riskTreeList = this.dealRiskSources(this.riskSources, this.riskSourceMap, this.riskSourceDetailMap);
+        this.initSvg(this.riskTreeList);
+      } else {
+        // 说明是根节点
+        this.riskSourceMap[0].push(
+          {
+            id: ++this.maxInt,
+            parentId: 0,
+            riskSources: 0,
+            name: `可能后果${++this.maxInt}`
+          }
+        );
+        this.riskTreeList = this.dealRiskSources(this.riskSources, this.riskSourceMap, this.riskSourceDetailMap);
+        this.initSvg(this.riskTreeList);
+      }
     },
     editNode(nodeId, nodeRiskId) {
       // this.$emit('editSvgNode', nodeId, nodeRiskId);

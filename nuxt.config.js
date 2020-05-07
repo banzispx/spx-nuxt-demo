@@ -61,6 +61,30 @@ export default {
     '/laravel': {
       target: 'https://laravel-auth.nuxtjs.app',
       pathRewrite: { '^/laravel': '/' }
+    },
+    '/baas': {
+      target: 'https://studio.e.huawei.com/',
+      pathRewrite: { '^/baas': '/baas' }
+      // headers: {
+      //   Origin: 'https://studio.e.huawei.com/',
+      //   Connection: 'keep-alive'
+      // }
+    },
+    '/huawei': {
+      target: 'https://studio.e.huawei.com/',
+      pathRewrite: { '^/huawei': '/' }
+      // headers: {
+      //   Origin: 'https://studio.e.huawei.com/',
+      //   Connection: 'keep-alive'
+      // }
+    },
+    '/service': {
+      target: 'https://studio.e.huawei.com/',
+      pathRewrite: { '^/service': '/service' }
+      // headers: {
+      //   Origin: 'https://studio.e.huawei.com/',
+      //   Connection: 'keep-alive'
+      // }
     }
   },
   auth: {

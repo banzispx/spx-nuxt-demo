@@ -101,6 +101,7 @@ export default {
       this.formLogin.username = document.querySelector("[name='username']").value;
       this.formLogin.password = document.querySelector("[name='password']").value;
     }
+    this.login();
     // const lang = navigator.language || navigator.browserLanguage;
     // switch (lang.toUpperCase()) {
     //   case 'ZH-CN':
