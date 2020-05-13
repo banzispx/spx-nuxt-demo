@@ -29,7 +29,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^6.2.2",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "prettier": "^2.0.4",
     "sass-loader": "^8.0.2",
     "vue-i18n": "^8.17.4"
@@ -37,7 +37,7 @@
   "config": {
     "nuxt": {
       "host": "0.0.0.0",
-      "port": "8066"
+      "port": "8016"
     }
   }
 }

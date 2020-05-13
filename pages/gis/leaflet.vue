@@ -280,6 +280,50 @@ export default {
         }
       }, 200);
     },
+    // 添加地震图标
+    addEarthquakeEvent() {
+      const center = [103.82, 33.2];
+      // 设置每个环形圈到圆心的距离
+      const disArr = [1, 15, 40, 80, 150, 350];
+      const colorArr = ['#F4FB1A', '#F7C50C', '#F68F11', '#FE2502'];
+      var options = { steps: 100, units: 'kilometers', properties: { foo: 'bar' } };
+      let upCircle = null;
+      for (let index = 0; index < disArr.length; index++) {
+        const item = disArr[index];
+        // eslint-disable-next-line no-undef
+        const polygonCircle = turf.circle(center, item, options);
+        console.log(polygonCircle, 'polygonCircle');
+        const polygonCircleArr = this.changeXYCoords(polygonCircle.geometry.coordinates[0]);
+        if (index === 0) {
+          L.polygon([polygonCircleArr], {
+            color: colorArr[index],
+            fillOpacity: 1,
+            weight: 0.5
+          }).addTo(this.earthquakeMap);
+        } else {
+          L.polygon([polygonCircleArr, upCircle], {
+            color: colorArr[index],
+            fillOpacity: 1,
+            weight: 0.5
+          }).addTo(this.earthquakeMap);
+        }
+        upCircle = polygonCircleArr;
+      }
+
+      // // eslint-disable-next-line no-undef
+      // const circle = turf.circle(center, 3, options);
+      // const coords = this.changeXYCoords(circle.geometry.coordinates[0]);
+      // // console.log(coords);
+      // // eslint-disable-next-line no-undef
+      // const sedarr = turf.circle(center, 15, options);
+      // const second = this.changeXYCoords(sedarr.geometry.coordinates[0]);
+      // // 这样添加的是一个环形
+      // L.polygon([second, coords], {
+      //   color: '#000fff',
+      //   fillOpacity: 1,
+      //   weight: 0.5
+      // }).addTo(this.earthquakeMap);
+    },
     changeXYCoords(latlngs) {
       const coords = [];
       latlngs.forEach((item) => {
@@ -287,56 +331,7 @@ export default {
       });
       return coords;
     },
-    addEarthquakeEvent() {
-      var center = [30.01, 109.1665];
-      var radius = 5;
-      var options = { steps: 1000, units: 'kilometers', properties: { foo: 'bar' } };
-      // eslint-disable-next-line no-undef
-      var circle = turf.circle(center, radius, options);
-      const coords = this.changeXYCoords(circle.geometry.coordinates[0]);
-      console.log(coords, 'coords');
-      L.polygon(coords, {
-        color: '#9B98FF',
-        fillOpacity: 0.4,
-        weight: 0.5
-      }).addTo(this.eventMap);
-      // this.earthquakeMap.addLayer(polygon);
-      // L.polygon([
-      //   [50.5, 30.5],
-      //   [37, 121],
-      //   [36.5, 122],
-      //   [36.5, 122.2]
-      // ], {
-      //   color: 'green',
-      //   fillColor: '#f03',
-      //   fillOpacity: 0.5
-      // }).addTo(this.eventMap);
-    },
     changeSupermapTileLayer(command) { // 切换底图
-      // this.mapYXlyr = L.supermap.tiandituTileLayer({
-      //   layerType: 'img',
-      //   key: '34baaf505786df95a096a4214767f141',
-      //   crs: L.CRS.TianDiTu_WGS84,
-      //   transparent: true,
-      //   opacity: 1
-      // });
-      // this.mapZJlyr1 = L.supermap.tiandituTileLayer({
-      //   layerType: 'img',
-      //   isLabel: true,
-      //   key: '34baaf505786df95a096a4214767f141'
-      // });
-      // this.mapZSlyr = L.supermap.tiandituTileLayer({
-      //   key: '34baaf505786df95a096a4214767f141',
-      //   crs: L.CRS.TianDiTu_WGS84,
-      //   transparent: true,
-      //   opacity: 1
-      // });
-      // this.mapZJlyr2 = L.supermap.tiandituTileLayer({
-      //   isLabel: true,
-      //   key: '34baaf505786df95a096a4214767f141'
-      // });
-      // this.RasterLayer = L.layerGroup([this.mapZJlyr1, this.mapYXlyr]);
-      // this.ZSMapGroup = L.layerGroup([this.mapZJlyr2, this.mapZSlyr]);
       if (command === 'cityMap') {
         if (this.eventMap.hasLayer(this.RasterLayer)) {
           this.eventMap.removeLayer(this.RasterLayer);
