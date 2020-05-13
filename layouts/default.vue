@@ -40,7 +40,8 @@ import damNav from '~/layouts/damNav';
 
 export default {
   // 此处配置，所有采用默认布局的都需要权限校验
-  middleware: ['auth'],
+  // middleware: ['auth'],
+  auth: 'false',
   components: {
     damHeader,
     damNav

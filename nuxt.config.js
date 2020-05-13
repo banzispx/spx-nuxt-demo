@@ -14,7 +14,9 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -63,24 +65,32 @@ export default {
       pathRewrite: { '^/laravel': '/' }
     },
     '/baas': {
-      target: 'https://studio.e.huawei.com/',
-      pathRewrite: { '^/baas': '/baas' }
+      target: 'https://studio.e.huawei.com/baas/auth/v1.0/oauth2/',
+      pathRewrite: { '^/baas': '/' }
       // headers: {
       //   Origin: 'https://studio.e.huawei.com/',
       //   Connection: 'keep-alive'
       // }
     },
     '/huawei': {
-      target: 'https://studio.e.huawei.com/',
+      target: 'https://59.36.10.215:7244/',
       pathRewrite: { '^/huawei': '/' }
       // headers: {
       //   Origin: 'https://studio.e.huawei.com/',
       //   Connection: 'keep-alive'
       // }
     },
+    '/token': {
+      target: 'https://59.36.10.215:7244/token'
+      // pathRewrite: { '^/token': '/token' }
+      // headers: {
+      //   Origin: 'https://studio.e.huawei.com/',
+      //   Connection: 'keep-alive'
+      // }
+    },
     '/service': {
-      target: 'https://studio.e.huawei.com/',
-      pathRewrite: { '^/service': '/service' }
+      target: 'https://studio.e.huawei.com//service/GRKJ__Rain/0.1.0/',
+      pathRewrite: { '^/service': '/' }
       // headers: {
       //   Origin: 'https://studio.e.huawei.com/',
       //   Connection: 'keep-alive'

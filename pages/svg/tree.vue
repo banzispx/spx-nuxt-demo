@@ -94,7 +94,7 @@ export default {
     this.riskTreeList = this.dealRiskSources(this.riskSources, this.riskSourceMap, this.riskSourceDetailMap);
     this.initSvg(this.riskTreeList);
     // 下面是测试
-    // this.getText();
+    this.getText();
   },
   methods: {
     ...mapActions('svg', [
