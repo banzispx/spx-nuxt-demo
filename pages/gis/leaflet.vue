@@ -81,11 +81,35 @@
         </el-col>
       </el-row>
     </div>
+    <!-- 弹出框 -->
+    <div :style="popoverPosition">
+      <el-popover
+        v-model="isShow"
+        popper-class="showSingleDamInfo"
+        width="380"
+        trigger="manual"
+        lock-scroll="true"
+        transition="fade-in-linear"
+      >
+        <div
+          v-loading="showSingleDam"
+        >
+          <div
+            class="deletePopover"
+            @click="isShow = false"
+          >
+            x
+          </div>
+          12121
+        </div>
+      </el-popover>
+    </div>
   </section>
 </template>
 <script>
 import chinaBouder from '~/static/geojson/china_bouder.json';
 import chinaBoundary from '~/static/geojson/china_boundary.json';
+import yellowIcon from '@/static/images/yellow.png';
 export default {
   head() {
     return {
@@ -116,7 +140,10 @@ export default {
       mapZSlyr: {},
       mapZJlyr1: {},
       mapZJlyr2: {},
-      measureGroup: {}
+      measureGroup: {},
+      popoverPosition: null,
+      isShow: true,
+      showSingleDam: true
     };
   },
   mounted() {
@@ -171,16 +198,24 @@ export default {
       //   地图: image,
       //   影像: image11
       // };
-      this.eventMap = new L.Map('map', {
-        crs: L.CRS.EPSG4326,
-        maxZoom: 18,
-        minZoom: 3,
-        zoom: 3,
-        zoomSnap: 0.5,
-        zoomControl: false, // 这里拒绝缩放
-        attributionControl: false // 是否显示右下角的地图介绍
+      if (!this.eventMap) {
+        this.eventMap = new L.Map('map', {
+          crs: L.CRS.EPSG4326,
+          maxZoom: 18,
+          minZoom: 3,
+          zoom: 3,
+          zoomSnap: 0.5,
+          zoomControl: false, // 这里拒绝缩放
+          attributionControl: false // 是否显示右下角的地图介绍
         // layers: [image]
-      }).setView([30.01, 109.16653009033203], 3);
+        }).setView([30.01, 109.16653009033203], 3);
+      }
+      this.eventMap.on({
+        click: () => {
+          console.log('map click');
+          this.isShow = false;
+        }
+      });
       // L.control.layers(baseLayers, {}).addTo(this.eventMap);
       // L.control.scale().addTo(this.eventMap); // 添加比例尺
       // 这里添加缩放
@@ -241,18 +276,46 @@ export default {
       this.RasterLayer = L.layerGroup([this.mapZJlyr1, this.mapYXlyr]);
       this.ZSMapGroup = L.layerGroup([this.mapZJlyr2, this.mapZSlyr]);
       this.RasterLayer.addTo(this.eventMap);
+
+      this.earthquakeMap = L.layerGroup().addTo(this.eventMap);
       // 下面是各种图表的添加方式
       this.addMakers();
       // 在地图初始化成功之后添加地震
-      this.earthquakeMap = L.layerGroup().addTo(this.eventMap);
       this.initEarthquake();
     },
     addMakers() {
-      // L.Polygon([30.01, 109.16653009033203]).bindTooltip('Hi There!').addTo(this.eventMap);
-      // var layer = L.Polygon([30.01, 109.16653009033203]).bindTooltip('Hi There!').addTo(this.eventMap);
-      // layer.openTooltip();
-      // layer.closeTooltip();
-      L.marker([30.01, 109.1665]).addTo(this.eventMap);
+      var icon = L.icon({
+        iconUrl: yellowIcon,
+        iconSize: [13, 15]
+      });
+      const marker = L.marker([30.01, 109.1665], { icon: icon }).addTo(this.earthquakeMap).bindTooltip('图表名称', { permanent: true });
+      marker.on({
+        click: this.dealIconClick
+      });
+    },
+    // 处理图表的点击事件
+    dealIconClick(e) { // 显示单个大坝信息
+      this.isShow = true;
+      this.showSingleDam = true;
+      const containerWidth = document.body.clientWidth - 143;
+      if (e.containerPoint.x + 380 > containerWidth && e.containerPoint.y + 300 < 664) {
+        this.popoverPosition = `position:absolute;left:${e.containerPoint.x - 380}px;top:${e.containerPoint.y}px`;
+      } else if (e.containerPoint.x + 380 < containerWidth && e.containerPoint.y + 300 > 664) {
+        this.popoverPosition = `position:absolute;left:${e.containerPoint.x}px;top:${e.containerPoint.y - 300}px`;
+      } else if (e.containerPoint.x + 380 > containerWidth && e.containerPoint.y + 300 > 664) {
+        this.popoverPosition = `position:absolute;left:${e.containerPoint.x - 380}px;top:${e.containerPoint.y - 300}px`;
+      } else {
+        this.popoverPosition = `position:absolute;left:${e.containerPoint.x}px;top:${e.containerPoint.y}px`;
+      }
+      setTimeout(() => {
+        this.showSingleDam = false;
+      }, 2000);
+      // this.getSingleDamInfo(damId).then((res) => {
+      //   this.showSingleDam = false;
+      //   const { data } = res;
+      //   this.singleDamInfo = data;
+      //   this.singleDamImages = this.singleDamInfo.hydropowerStation.baseImg || this.singleDamInfo.hydropowerStation.imageUrl || this.singleDamInfo.hydropowerStation.images[0];
+      // });
     },
     createLayers(result) {
       if (!result || !result.features || result.features.length < 1) {
@@ -284,7 +347,7 @@ export default {
     addEarthquakeEvent() {
       const center = [103.82, 33.2];
       // 设置每个环形圈到圆心的距离
-      const disArr = [1, 15, 40, 80, 150, 350];
+      const disArr = [1, 15, 40, 80, 100, 150];
       const colorArr = ['#F4FB1A', '#F7C50C', '#F68F11', '#FE2502'];
       var options = { steps: 100, units: 'kilometers', properties: { foo: 'bar' } };
       let upCircle = null;
@@ -292,7 +355,7 @@ export default {
         const item = disArr[index];
         // eslint-disable-next-line no-undef
         const polygonCircle = turf.circle(center, item, options);
-        console.log(polygonCircle, 'polygonCircle');
+        // console.log(polygonCircle, 'polygonCircle');
         const polygonCircleArr = this.changeXYCoords(polygonCircle.geometry.coordinates[0]);
         if (index === 0) {
           L.polygon([polygonCircleArr], {
@@ -303,7 +366,7 @@ export default {
         } else {
           L.polygon([polygonCircleArr, upCircle], {
             color: colorArr[index],
-            fillOpacity: 1,
+            fillOpacity: 0.5,
             weight: 0.5
           }).addTo(this.earthquakeMap);
         }
@@ -559,6 +622,23 @@ export default {
     }
     .damNameColor {
       color: #53b3e3;
+    }
+  }
+  .showSingleDamInfo{
+    position: absolute;
+    padding: 15px 15px 10px 15px;
+    height: 300px;
+    overflow: auto;
+    .el-loading-spinner{
+      top:50%;
+    }
+    .deletePopover{
+      position: absolute;
+      right: 5px;
+      top: 2px;
+      font-size: 18px;
+      cursor: pointer;
+      font-weight: 650;
     }
   }
   #tooltip {
