@@ -14,9 +14,11 @@
   "dependencies": {
     "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.10.2",
+    "echarts": "^4.7.0",
     "element-ui": "^2.4.11",
     "normalize.css": "^8.0.1",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "vue-echarts": "^5.0.0-beta.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
@@ -32,7 +34,8 @@
     "node-sass": "^4.14.1",
     "prettier": "^2.0.4",
     "sass-loader": "^8.0.2",
-    "vue-i18n": "^8.17.4"
+    "vue-i18n": "^8.17.4",
+    "webpack-node-externals": "^1.7.2"
   },
   "config": {
     "nuxt": {
