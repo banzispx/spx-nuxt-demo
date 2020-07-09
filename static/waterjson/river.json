@@ -1,0 +1,26 @@
+[
+  {
+    "riverBasinName" : "黄河流域",
+    "riverBasinCode" : "A3"
+  },
+  {
+    "riverBasinName" : "淮河流域",
+    "riverBasinCode" : "A4"
+  },
+  {
+    "riverBasinName" : "长江流域",
+    "riverBasinCode" : "A5"
+  },
+  {
+		"riverBasinName" : "东南沿海流域",
+	  "riverBasinCode" : "A6"
+  },
+  {
+    "riverBasinName" : "珠江流域",
+    "riverBasinCode" : "A7"
+  },
+  {
+    "riverBasinName" : "松辽流域",
+    "riverBasinCode" : "A1"
+  }
+]

@@ -4,7 +4,8 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || '',
+    // title: process.env.npm_package_name || '',
+    title: 'ProfileMap',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -95,7 +96,16 @@ export default {
       //   Origin: 'https://studio.e.huawei.com/',
       //   Connection: 'keep-alive'
       // }
+    },
+
+    '/riverinstance':
+    { // http://172.17.197.32:8083/jsonrpc/basin.getOneDamListByRiverId
+      target: 'http://172.17.197.40:8083/jsonrpc',
+      pathRewrite: {
+        '^/riverinstance': ''
+      }
     }
+
   },
   auth: {
     redirect: {

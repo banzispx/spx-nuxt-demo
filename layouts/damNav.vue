@@ -137,6 +137,13 @@ export default {
               title: 'leaflet',
               hasAuth: true,
               hidden: false
+            },
+            {
+              path: '/gis/water',
+              key: '3-0',
+              title: 'water',
+              hasAuth: true,
+              hidden: false
             }
           ]
         }
