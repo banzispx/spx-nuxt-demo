@@ -1,3 +1,4 @@
+const nodeExternals = require('webpack-node-externals');
 export default {
   mode: 'spa',
   /*
@@ -35,7 +36,7 @@ export default {
    ** Plugins to load before mounting the App
    *https://www.cnblogs.com/weiqinl/p/10581867.html 关于国际化的参考
    */
-  plugins: ['~/plugins/element/element-ui', '~/plugins/axios', '~/plugins/i18n.js'],
+  plugins: ['~/plugins/element/element-ui', '~/plugins/axios', '~/plugins/i18n.js', '~/plugins/vue-echarts'],
   router: {
     middleware: ['i18n']
   },
@@ -160,6 +161,13 @@ export default {
           loader: 'eslint-loader',
           exclude: /(node_modules)/
         });
+      }
+      if (ctx.isServer) {
+        config.externals = [
+          nodeExternals({
+            whitelist: [/es6-promise|\.(?!(?:js|json)$).{1,5}$/i, /^vue-echarts/]
+          })
+        ];
       }
     }
   }
