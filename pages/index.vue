@@ -59,7 +59,8 @@ import * as _ from 'lodash';
 import 'leaflet/dist/leaflet.css';
 import chinaBouder from '~/static/geojson/china_bouder.json';
 import chinaBoundary from '~/static/geojson/china_boundary.json';
-import shuixi from '~/static/geojson/shuixi.json';
+// import shuixi from '~/static/geojson/shuixi.json';
+import shuixi from '~/static/geojson/xilige.json';
 import yellowIcon from '@/static/images/palceIcon/yellow.png';
 export default {
   layout: 'none',
@@ -107,6 +108,8 @@ export default {
     const _this = this;
     _this.init();
     // this.gitNotArr();
+    // const feature = this.gitFeatureByRiverId('AJB28006');
+    // console.log(JSON.stringify(feature));
   },
   methods: {
     gitNotArr() {
@@ -217,6 +220,10 @@ export default {
         this.riverChange('ADA00000');
         this.childriverChange('ADA00000');
         this.childvalue = 'ADA00000';
+        // this.value = 'AGA06000';
+        // this.riverChange('AGA06000');
+        // this.childriverChange('AGA13006');
+        // this.childvalue = 'AGA13006';
       }
     },
     riverChange(event) {
@@ -360,9 +367,33 @@ export default {
           }
         });
     },
+    // 通过给定的数组画出不同颜色的线段 测试函数
+    drawArrLineWithDifColors(arr) {
+      const colors = ['black', 'blue', 'purple', 'white', 'red', 'black', 'blue', 'purple', 'white'];
+      this.lineLayer.clearLayers();
+      arr.forEach((item, index) => {
+        const featute = this.gitFeatureByRiverId(item);
+        this.liuyu = {
+          type: 'FeatureCollection',
+          features: [featute]
+        };
+        const lineBoundary = L.geoJSON(this.liuyu, {
+          style: {
+            color: colors[index],
+            fillColor: '#ffffff',
+            opacity: 0.65,
+            weight: 2
+          }
+        });
+        this.lineLayer.addLayer(lineBoundary);
+      });
+    },
     // 通过给出的支流arr画出线
     dealchildRiverArr(toarr) {
+      // this.drawArrLineWithDifColors(['AGA04006']);
+
       // 传入数组，返回红色和黄色的feature
+      this.lineLayer.clearLayers();
       const { redFeature, yellowFeature } = this.getRedYellowFeatureByArr([...toarr].reverse());
       this.liuyu = {
         type: 'FeatureCollection',
@@ -427,7 +458,6 @@ export default {
           distance = newDistance;
         }
       });
-      console.log(childFindIndex, 'childFindIndex');
       const redFeature = _.cloneDeep(sedRiverIdFeature);
       redFeature.geometry.coordinates.splice(0, childFindIndex);
       // redFeature.geometry.coordinates = _.cloneDeep(sedRiverIdFeature.geometry.coordinates).splice(0, childFindIndex);
@@ -449,14 +479,11 @@ export default {
         secondFeature = _.cloneDeep(this.shuixi.features.filter(item => {
           return arr[index + 1] === item.properties.RiverId;
         }));
-
-        console.log(firstFeature, secondFeature);
         const first = firstFeature[0].geometry.coordinates[firstFeature[0].geometry.coordinates.length - 1][0];
         const firstTwo = secondFeature[0].geometry.coordinates[0][0];
         const second = firstFeature[0].geometry.coordinates[firstFeature[0].geometry.coordinates.length - 1][1];
         const secondTwo = secondFeature[0].geometry.coordinates[0][1];
         const distance = (firstTwo - first) * (firstTwo - first) + (secondTwo - second) * (secondTwo - second);
-        console.log(distance, 'distance');
         if (secondTwo && distance < 0.1) {
           return true;
         }
