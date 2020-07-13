@@ -101,7 +101,8 @@ export default {
 
     '/riverinstance':
     { // http://172.17.197.32:8083/jsonrpc/basin.getOneDamListByRiverId
-      target: 'http://172.17.197.40:8083/jsonrpc',
+      // target: 'http://172.17.197.40:8083/jsonrpc',
+      target: 'http://emgtest.dam.com.cn:8082/jsonrpc',
       pathRewrite: {
         '^/riverinstance': ''
       }
