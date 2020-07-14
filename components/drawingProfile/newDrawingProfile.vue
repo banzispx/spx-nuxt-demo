@@ -792,6 +792,8 @@ export default {
         bottom: 0px;
         right: 80px; // 右侧坐标轴
       }
+      .chart_content_element::-webkit-scrollbar {height:16px;}
+      .chart_content_element::-webkit-scrollbar-thumb {background-color:#999;}
       .svg_content_element{
         position:absolute;
         left: -80px;

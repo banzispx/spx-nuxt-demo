@@ -18,7 +18,7 @@ body {
   background-color: $body-bg;
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
+  // -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
 }
@@ -86,25 +86,25 @@ p {
 }
 
 // 去掉webkit表单自动填写时的黄色背景
-input:-webkit-autofill,
-textarea:-webkit-autofill,
-select:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px white inset;
-}
+// input:-webkit-autofill,
+// textarea:-webkit-autofill,
+// select:-webkit-autofill {
+//   -webkit-box-shadow: 0 0 0 1000px white inset;
+// }
 
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-::-webkit-scrollbar-track {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 2px solid transparent;
-  border-radius: 10px;
-  background-clip: padding-box;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-}
+// ::-webkit-scrollbar {
+//   width: 10px;
+//   height: 10px;
+// }
+// ::-webkit-scrollbar-track {
+//   background-color: rgba(0, 0, 0, 0.1);
+// }
+// ::-webkit-scrollbar-thumb {
+//   background-color: rgba(0, 0, 0, 0.3);
+//   border: 2px solid transparent;
+//   border-radius: 10px;
+//   background-clip: padding-box;
+//   &:hover {
+//     background-color: rgba(0, 0, 0, 0.4);
+//   }
+// }
