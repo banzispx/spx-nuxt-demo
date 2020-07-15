@@ -23,7 +23,16 @@ import chinaBoundary from '~/static/geojson/china_boundary.json';
 import shuixi from '~/static/geojson/reservetwo.json';
 import yellowIcon from '@/static/images/palceIcon/yellow.png';
 export default {
-  props: ['parentId', 'childId'],
+  props: {
+    parentId: {
+      type: String,
+      default: ''
+    },
+    childId: {
+      type: String,
+      default: ''
+    }
+  },
   head() {
     return {
       link: [

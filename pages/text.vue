@@ -65,7 +65,7 @@ import 'leaflet/dist/leaflet.css';
 import chinaBouder from '~/static/geojson/china_bouder.json';
 import chinaBoundary from '~/static/geojson/china_boundary.json';
 // import shuixi from '~/static/geojson/shuixi.json';
-import shuixi from '~/static/geojson/xilige.json';
+import shuixi from '~/static/geojson/reservetwo.json';
 export default {
   layout: 'none',
   head() {
