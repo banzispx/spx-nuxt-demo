@@ -74,6 +74,17 @@ export default {
       //   Connection: 'keep-alive'
       // }
     },
+    '/json': {
+      target: 'https://dongzhou-1257537524.cos.ap-shanghai.myqcloud.com',
+      pathRewrite: { '^/json': '/' }
+      // headers: {
+      //   Origin: 'https://dongzhou-1257537524.cos.ap-shanghai.myqcloud.com',
+      //   Connection: 'keep-alive'
+      // }
+    },
+    // '/geojson': {
+    //   target: 'https://www.xiaobanzi.cn/geojson'
+    // },
     '/huawei': {
       target: 'https://59.36.10.215:7244/',
       pathRewrite: { '^/huawei': '/' }

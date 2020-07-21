@@ -1,7 +1,7 @@
 <template>
   <section class="gisStyle">
     <div
-      id="map"
+      id="mapsecond"
       class="main-map"
     />
     <div id="tooltip" />
@@ -169,7 +169,7 @@ export default {
       } else {
         console.log(222);
       }
-    }, 200);
+    }, 2000);
   },
   methods: {
     init() {
@@ -209,7 +209,7 @@ export default {
       //   影像: image11
       // };
       if (!this.eventMap) {
-        this.eventMap = new L.Map('map', {
+        this.eventMap = new L.Map('mapsecond', {
           crs: L.CRS.EPSG4326,
           maxZoom: 18,
           minZoom: 3,

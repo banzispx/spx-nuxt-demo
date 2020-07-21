@@ -94,7 +94,7 @@ export default {
     this.riskTreeList = this.dealRiskSources(this.riskSources, this.riskSourceMap, this.riskSourceDetailMap);
     this.initSvg(this.riskTreeList);
     // 下面是测试
-    this.getText();
+    // this.getText();
   },
   methods: {
     ...mapActions('svg', [
@@ -113,17 +113,17 @@ export default {
           console.log(res.data, 'data');
         }
       });
-      // this.$axios({
-      //   method: 'get',
-      //   url: '/huawei/service/GRKJ__Rain/0.1.0/queryNewRainMonitor?addvcd&bsnm&stcds',
-      //   headers: {
-      //     'access-token': res.data.access_token
-      //   }
-      // }).then(res => {
-      //   if (res.status === 200) {
-      //     console.log(res.data, 'data');
-      //   }
-      // });
+      this.$axios({
+        method: 'get',
+        url: '/huawei/service/GRKJ__Rain/0.1.0/queryNewRainMonitor?addvcd&bsnm&stcds',
+        headers: {
+          'access-token': res.data.access_token
+        }
+      }).then(res => {
+        if (res.status === 200) {
+          console.log(res.data, 'data');
+        }
+      });
     },
     // 处理传入数据的父子关系，组装成树形结构
     dealRiskSources(riskSources, riskSourceMap, riskSourceDetailMap) {

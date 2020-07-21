@@ -22,6 +22,7 @@
 
       <el-select
         v-model="childvalue"
+        multiple
         placeholder="请选择支流"
         @change="childriverChange"
       >
@@ -91,7 +92,7 @@ export default {
       showOrNt: false,
       riverId: 'ADA00000',
       drawingData: '流域',
-      childvalue: '',
+      childvalue: [],
       riverChildArr: [],
       rootRivers: [],
       value: '',
@@ -147,17 +148,17 @@ export default {
         this.value = root;
         this.riverChange(root);
         this.childriverChange(child);
-        this.childvalue = child;
+        this.childvalue = [child];
       } else {
         this.value = 'ADA00000';
         this.riverChange('ADA00000');
         this.childriverChange('ADA00000');
-        this.childvalue = 'ADA00000';
+        this.childvalue = ['ADA00000'];
       }
     },
     riverChange(event) {
       this.value = event;
-      this.childvalue = event;
+      this.childvalue = [event];
       // // 获取有大坝的支流
       this.getHasDamByRiverId(event);
     },
@@ -440,7 +441,7 @@ export default {
       });
 
       this.riverChildArr = arr;
-      this.childvalue = riverId;
+      this.childvalue = [riverId];
       // this.childriverChange(riverId);
     }
   }

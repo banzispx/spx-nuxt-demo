@@ -139,9 +139,9 @@ export default {
               hidden: false
             },
             {
-              path: '/gis/water',
-              key: '3-0',
-              title: 'water',
+              path: '/gis/river',
+              key: '3-1',
+              title: 'river',
               hasAuth: true,
               hidden: false
             }

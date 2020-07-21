@@ -21,6 +21,7 @@ import 'leaflet/dist/leaflet.css';
 import chinaBouder from '~/static/geojson/china_bouder.json';
 import chinaBoundary from '~/static/geojson/china_boundary.json';
 import shuixi from '~/static/geojson/reservetwo.json';
+import xingxing from '@/static/images/xingxing.png';
 import yellowIcon from '@/static/images/palceIcon/yellow.png';
 export default {
   props: {
@@ -29,8 +30,10 @@ export default {
       default: ''
     },
     childId: {
-      type: String,
-      default: ''
+      type: Array,
+      default: function () {
+        return [];
+      }
     }
   },
   head() {
@@ -85,20 +88,18 @@ export default {
     _this.init();
   },
   methods: {
-
     gitNotArr() {
       const shuixiArr = [];
       this.shuixi.features.forEach(item => {
         shuixiArr.push(item.properties.RiverCode);
       });
-      console.log(shuixiArr, 'shuixiArr');
+      // console.log(shuixiArr, 'shuixiArr');
       const arr = [];
       this.requireRiverList.forEach(item => {
         if (shuixiArr.indexOf(item) < 0) {
           arr.push(item);
         }
       });
-      console.log(arr, 'arr2121', shuixiArr.indexOf('AEA00006'));
     },
     togle() {
       this.showOrNt = !this.showOrNt;
@@ -186,15 +187,19 @@ export default {
     },
     // 添加河流大坝
     addDamMaker(damList) {
-      this.earthquakeMap.clearLayers();
       damList.forEach(item => {
         // 过滤大坝名字
-        const name = this.filterDamName(item.damName);
-        var icon = L.icon({
+        // const name = this.filterDamName(item.damName);
+        var yellow = L.icon({
           iconUrl: yellowIcon,
           iconSize: [13, 15]
         });
-        L.marker([item.latitude, item.longitude], { icon: icon }).addTo(this.earthquakeMap).bindTooltip(name, { permanent: true });
+        var xing = L.icon({
+          iconUrl: xingxing,
+          iconSize: [13, 15]
+        });
+        const icon = item.damsInfo.registerStatus * 1 !== 1 ? yellow : xing;
+        L.marker([item.latitude, item.longitude], { icon: icon }).addTo(this.earthquakeMap).bindTooltip(item.damName, { permanent: !this.damShow });
       });
     },
     // 过滤大坝名字
@@ -250,13 +255,30 @@ export default {
           endY: item.endY
         });
       });
+      // 设置黄河为默认的值
+      // const { root, child } = this.$route.query;
+      // if (root) {
+      //   this.value = root;
+      //   this.riverChange(root);
+      //   this.childriverChange([child]);
+      //   this.childvalue = [child];
+      // } else {
+      //   this.value = 'ADA00000';
+      //   this.riverChange('ADA00000');
+      //   this.childriverChange(['ADA00000']);
+      //   this.childvalue = ['ADA00000'];
+      //   // this.value = 'AFA03000';
+      //   // this.riverChange('AFA03000');
+      //   // this.childriverChange('AFC17F16');
+      //   // this.childvalue = 'AFC17F16';
+      // }
     },
     riverChange(event) {
       this.riversLayer.clearLayers();
       this.addLine.clearLayers();
       this.earthquakeMap.clearLayers();
       this.lineLayer.clearLayers();
-      this.childvalue = '';
+      this.childvalue = [];
       this.waterBoundary = null;
       const item = this.rootRivers.filter(item => {
         return item.riverId === event;
@@ -269,14 +291,33 @@ export default {
       this.getHasDamByRiverId(event);
     },
     // 处理支流的改变
-    childriverChange(riverId) {
-      const damList = this.riverChild.filter(item => {
-        return item.riverId === riverId;
-      });
-      console.log('this.riverChild', damList, riverId);
-      // 画出所选择的线
-      this.riverId = riverId;
-      // this.drawCheckLine(damList[0].riverId);
+    childriverChange(riverIdArr) {
+      // 清除大坝坐标
+      this.earthquakeMap.clearLayers();
+      this.addLine.clearLayers();
+      this.lineLayer.clearLayers();
+      // console.log(riverIdArr, 'riverIdArr');
+      for (let index = 0; index < riverIdArr.length; index++) {
+        const element = riverIdArr[index];
+        // 选取第一个作为泼面图的数据
+        if (index === 0) {
+          this.$axios
+            .post(
+              '/riverinstance/basin.getRiverChildToHead',
+              '"' + element + '"'
+            )
+            .then(res => {
+              if (res.status === 200) {
+                this.riverData = _.cloneDeep(res.data);
+              }
+            });
+        }
+
+        const damList = this.riverChild.filter(item => {
+          return item.riverId === element;
+        });
+        this.drawCheckLine(damList[0].riverId);
+      }
     },
     // 画出所选的线
     drawCheckLine(riverId) {
@@ -288,7 +329,7 @@ export default {
         .then(res => {
           if (res.status === 200) {
             // 获取剖面图的数据
-            this.riverData = _.cloneDeep(res.data);
+            // this.riverData = _.cloneDeep(res.data);
             const arr = [];
             const newArr = [];
             let riverAndchildDams = [];
@@ -304,7 +345,6 @@ export default {
             });
             // 画出支流和干流下游的大坝
             this.addDamMaker([...riverAndchildDams]);
-            this.lineLayer.clearLayers();
             const features = this.shuixi.features.filter(item => {
               return arr.indexOf(item.properties.RiverCode) >= 0;
               // return arr[0] === item.properties.RiverId;
@@ -398,37 +438,14 @@ export default {
           }
         });
     },
-    // 通过给定的数组画出不同颜色的线段 测试函数
-    drawArrLineWithDifColors(arr) {
-      const colors = ['black', 'blue', 'purple', 'white', 'red', 'black', 'blue', 'purple', 'white'];
-      this.lineLayer.clearLayers();
-      arr.forEach((item, index) => {
-        const featute = this.gitFeatureByRiverId('ADA00000');
-        this.liuyu = {
-          type: 'FeatureCollection',
-          features: [featute]
-        };
-        const lineBoundary = L.geoJSON(this.liuyu, {
-          style: {
-            color: colors[index],
-            fillColor: '#ffffff',
-            opacity: 0.65,
-            weight: 2
-          }
-        });
-        this.lineLayer.addLayer(lineBoundary);
-      });
-    },
     // 通过给出的支流arr画出线
     dealchildRiverArr(toarr) {
-      // this.drawArrLineWithDifColors(['AGA04006']);
-
-      // 传入数组，返回红色和黄色的feature
-      this.lineLayer.clearLayers();
-      const { redFeature, yellowFeature } = this.getRedYellowFeatureByArr([...toarr].reverse());
+      // 传入数组，返回红色和黄色的featureqing
+      // this.lineLayer.clearLayers();
+      const { redFeature } = this.getRedYellowFeatureByArr([...toarr].reverse());
 
       const riverLevelColors = ['#8b0000', '#B22222', '#ff0000', '#ff6600', '#ff9999', '#ff99ff', '#ffcccc', '#ffccff'];
-      // const riverLevelColors = ['#ff0000', '#0033ff', '#0099ff', '#3300ff', '#336600', '#ff6633'];
+      // const riverLevelColors = ['#80000', '#8b0000', '#52a2a2', '#b22222', '#FF69B4', '#FFC0C8'];
       redFeature.forEach(item => {
         const feature = item.feature;
         const liuyu = {
@@ -445,7 +462,7 @@ export default {
         });
         this.lineLayer.addLayer(lineBoundary);
       });
-      this.addlineByfeature(yellowFeature);
+      // this.addlineByfeature(yellowFeature);
     },
     getRedYellowFeatureByArr(arr) {
       // 根据前后两条riverId获取后一条riverId的红色和黄色的feature
@@ -538,7 +555,6 @@ export default {
     },
     // 根据feature添加线
     addlineByfeature(yellowFeature) {
-      this.addLine.clearLayers();
       const line = {
         type: 'FeatureCollection',
         features: yellowFeature
@@ -555,7 +571,7 @@ export default {
     },
     // 画root河流的流域
     drawRiverByArr(arr) {
-      const riverLevelColors = ['#33ff00', '#33ff00', '#33ff00', '#33ff00', '#33ff00', '#33ff00', '#33ff00'];
+      // const riverLevelColors = ['#33ff00', '#33ff00', '#33ff00', '#33ff00', '#33ff00', '#33ff00', '#33ff00'];
       this.riversLayer.clearLayers();
       arr.forEach(item => {
         const featute = this.gitFeatureByRiverId(item.riverId);
@@ -565,7 +581,8 @@ export default {
         };
         const waterBoundary = L.geoJSON(liuyu, {
           style: {
-            color: riverLevelColors[item.riverLevel * 1 - 1],
+            // color: riverLevelColors[item.riverLevel * 1 - 1],
+            color: '#459df5',
             fillColor: '#FFFFFF',
             opacity: 0.65,
             weight: 2
@@ -595,8 +612,8 @@ export default {
       });
 
       this.riverChild = arr;
-      this.childvalue = riverId;
-      this.childriverChange(riverId);
+      this.childvalue = [riverId];
+      this.childriverChange([riverId]);
     }
   }
 };
